@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>Short URL</h1>
+            <h2><a href="{{ url('transfer', {key: encoded}, true) }}" target="_blank" class="card-link">{{ encoded }}</a></h2>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title"><a href="{{ details.url }}" target="_blank">{{ details.url }}</a></h4>
+                <p class="card-text"><strong>Created: </strong>{{ details.created|date('D, d M y H:i:s O') }}</p>
+                <p class="card-text"><strong>Total Hits: </strong>{{ details.hit|number_format }}</p>
+                <a href="{{ url('remove', { key: encoded }, true) }}" class="btn btn-danger btn-sm">Remove</a>
+              </div>
+            </div>
+        </div>
+    </div>
+    
+    {% if list is defined and list|length > 0 %}
+    <div class="row mt-2">
+        <div class="col-12">
+            <table class="table table-bordered table-striped table-sm table-responsive-sm">
+                <caption>List of Shortened URL's</caption>
+                <thead class="table-dark">
+                    <tr>
+                        <th>IP Address</th>
+                        <th>User Agent</th>
+                        <th>At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in list %}
+                    {% if item.ip is defined %}
+                    <tr>
+                        <td>{{ item.ip }}</td>
+                        <td>{{ item.agent }}</td>
+                        <td>{{ item.clicked|date('D, d M y H:i:s O') }}</p>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
