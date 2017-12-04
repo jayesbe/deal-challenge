@@ -27,7 +27,7 @@ Bootstrap 4 has been used for some basic styling.
 
 ## Testing
 
-To run the current test suite, execute `phpunit` in the project root directory.
+To run the current test suite, execute `bin/phpunit` in the project root directory.
 
 ## Solution Notes
 
